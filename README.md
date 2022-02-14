@@ -1,10 +1,12 @@
+# 🔊 개발자 커뮤니티 사이트 프로젝트
+
 > This is a developer community site project using Java and Spring.</br>
 > This is my first side project.</br>
 > If there are any shortcomings, feedback is always welcome.
 
-## 🔊 개발자 커뮤니티 사이트 프로젝트
+</br>
 
-### 구현 기능
+## 구현 기능
 
 * [ ] 회원가입
   * [ ] github, gmail 연결
@@ -47,37 +49,34 @@
 
   * [ ] 등록한 질문 리스트
   * [ ] 등록한 답글 리스트
-<<<<<<< HEAD
 
   </br>
 
-### FlowChart
+## FlowChart
 
-<img src="./image/Developer_Commutity_FlowChart.png" width="450">
-
-</br>
-
-### DB - ERD
-
-<img src="./image/Developer_Community_ERD.png" width="450">
+<img src="./image/Developer_Commutity_FlowChart.png" width="550">
 
 </br>
 
-### 전체 시스템 구성도
+## DB - ERD
 
-<img src="./image/System_Diagram.png" width="450">
+<img src="./image/Developer_Community_ERD.png" width="550">
 
 </br>
 
-### 데이터 플로우
+## 전체 시스템 구성도
+
+<img src="./image/System_Diagram.png" width="550">
+
 </br>
 
-### 백엔드 개발
+## 데이터 플로우
 </br>
 
-### 프론트엔드 개발
+## 백엔드 개발
 </br>
 
-### 향후 추가 기능
-=======
->>>>>>> 2abead4385332b15fd752787ca1ed6a2e6a06a90
+## 프론트엔드 개발
+</br>
+
+## 향후 추가 기능

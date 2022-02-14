@@ -1,4 +1,3 @@
-# developer-community-site-project
 > This is a developer community site project using Java and Spring.</br>
 > This is my first side project.</br>
 > If there are any shortcomings, feedback is always welcome.
@@ -48,3 +47,34 @@
 
   * [ ] 등록한 질문 리스트
   * [ ] 등록한 답글 리스트
+
+  </br>
+
+### FlowChart
+
+<img src="./image/Developer_Commutity_FlowChart.png" width="450">
+
+</br>
+
+### DB - ERD
+
+<img src="./image/Developer_Community_ERD.png" width="450">
+
+</br>
+
+### 전체 시스템 구성도
+
+<img src="./image/System_Diagram.png" width="450">
+
+</br>
+
+### 데이터 플로우
+</br>
+
+### 백엔드 개발
+</br>
+
+### 프론트엔드 개발
+</br>
+
+### 향후 추가 기능

@@ -6,7 +6,6 @@
         <h1>IRWW - 개발자 커뮤니티</h1>
         <h3>I did it right, why is this not working?</h3>
         <p>로그인</p>
-        <form action="/" method="post">
         <form>
             <div class="form-group">
                 <label for="loginId">아이디</label>
@@ -15,8 +14,8 @@
                 <input type="text" id="loginPassword" name="loginPassword" placeholder="Password">
             </div>
             <button type="submit" id="btnLogin">로그인</button>
-            <button id="btnJoin" formaction="/page" formmethod="get">회원가입</button>
         </form>
+        <input type="button" value="회원가입" onclick="location.href='/join'"/>
     </div>
 </div> <!-- /container -->
 </body>

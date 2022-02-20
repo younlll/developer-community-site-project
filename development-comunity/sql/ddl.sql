@@ -36,3 +36,13 @@ create table question_by_category (
     upd_dttm timestamp default current_timestamp,
     primary key (question_id, category_id)
 );
+
+drop table question_detail;
+create table question_detail (
+    question_id int not null,
+    category_id int not null,
+    descript varchar(5000),
+    reg_dttm timestamp default current_timestamp,
+    upd_dttm timestamp default current_timestamp,
+    primary key (question_id, category_id)
+);

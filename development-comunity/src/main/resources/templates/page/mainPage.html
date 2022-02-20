@@ -1,23 +1,15 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div>
+<div class="container">
     <div>
         <h1>IRWW - 개발자 커뮤니티</h1>
         <h3>I did it right, why is this not working?</h3>
-        <aside>
-            <ul>
-                <li><a href="./qnaAll.html" target="iframe1">All</a></li>
-                <li><a href="" target="iframe1">Backend</a></li>
-                <li><a href="" target="iframe1">Frontend</a></li>
-                <li><a href="" target="iframe1">Algorithm</a></li>
-            </ul>
-        </aside>
-        <section>
-            <article>
-                <iframe name="iframe1" src="./qnaAll.html"></iframe>
-            </article>
-        </section>
+        <ul>
+            <li th:each="category:${categories}">
+                <a th:href="@{/page/{category}(category=${category.linkPageUrl}, linkId=${category.categoryId})}" th:text="${category.categoryName}"></a>
+            </li>
+        </ul>
     </div>
 </div> <!-- /container -->
 </body>

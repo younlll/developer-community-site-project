@@ -71,8 +71,6 @@ class UserServiceTest {
         loginForm.setEmail("abc@gmail.com");
         loginForm.setPassword("1234");
         assertThat(userService.userLogin(loginForm)).isEqualTo(true);
-
-        //가입되어 있지 않은 계정입니다.(이메일 또는 비밀번호를 확인해 주세요)
     }
 
     @Test

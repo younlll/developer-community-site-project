@@ -4,7 +4,6 @@ import project.developmentcomunity.controller.LoginForm;
 import project.developmentcomunity.domain.User;
 import project.developmentcomunity.repository.UserRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 public class UserService {

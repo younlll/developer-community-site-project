@@ -18,6 +18,7 @@ create table category (
     category_name varchar(30) not null,
     use_yn char(1) not null,
     super_category_id int,
+    link_page_url varchar(30),
     reg_dttm timestamp default current_timestamp,
     upd_dttm timestamp default current_timestamp,
     primary key (category_id)

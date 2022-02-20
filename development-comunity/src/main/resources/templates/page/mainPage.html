@@ -7,7 +7,7 @@
         <h3>I did it right, why is this not working?</h3>
         <ul>
             <li th:each="category:${categories}">
-                <a th:href="@{/page/{category}(category=${category.linkPageUrl}, linkId=${category.categoryId})}" th:text="${category.categoryName}"></a>
+                <a th:href="@{/page/{category}(category=${category.linkPageUrl}, categoryId=${category.categoryId})}" th:text="${category.categoryName}"></a>
             </li>
         </ul>
     </div>

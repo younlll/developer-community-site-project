@@ -1,13 +1,20 @@
 package project.developmentcomunity.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import java.util.List;
 
+@Entity
 public class Category {
 
     private long categoryId;
     private String categoryName;
     private String linkPageUrl;
 
+    @Id
+    @Column(name="category_id")
     public long getCategoryId() {
         return categoryId;
     }

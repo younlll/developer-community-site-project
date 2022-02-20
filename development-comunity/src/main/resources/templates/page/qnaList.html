@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
-<p>qna-list-page</p>
+<div class="container">
+    <div>
+        <h1>IRWW - 개발자 커뮤니티</h1>
+        <h3>I did it right, why is this not working?</h3>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>순번</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>조회수</th>
+                    <th>등록일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="qna:${qnas}">
+                    <td></td>
+                    <td th:text="${qna.questionTitle}"></td>
+                    <td th:text="${qna.nickName}"></td>
+                    <td th:text="${qna.views}"></td>
+                    <td th:text="${qna.regDttm}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
 </body>
 </html>

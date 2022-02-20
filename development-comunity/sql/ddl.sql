@@ -1,3 +1,4 @@
+drop table user;
 create table user (
     user_id int not null,
     email varchar(30) not null,
@@ -11,6 +12,7 @@ create table user (
     primary key(user_id, email)
 );
 
+drop table category;
 create table category (
     category_id int not null,
     category_name varchar(30) not null,

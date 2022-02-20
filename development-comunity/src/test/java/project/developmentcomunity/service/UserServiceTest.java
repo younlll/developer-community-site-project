@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import project.developmentcomunity.controller.LoginForm;
 import project.developmentcomunity.domain.User;
 import project.developmentcomunity.repository.UserRepository;
 
@@ -62,5 +63,24 @@ class UserServiceTest {
         userService.joinUser(user1);
         IllegalStateException e = Assertions.assertThrows(IllegalStateException.class, () -> userService.joinUser(user2));
         assertThat(e.getMessage()).isEqualTo("이미 가입되어 있는 이메일 주소입니다.");
+    }
+
+    @Test
+    void 로그인_성공() {
+        LoginForm loginForm = new LoginForm();
+        loginForm.setEmail("abc@gmail.com");
+        loginForm.setPassword("1234");
+        assertThat(userService.userLogin(loginForm)).isEqualTo(true);
+
+        //가입되어 있지 않은 계정입니다.(이메일 또는 비밀번호를 확인해 주세요)
+    }
+
+    @Test
+    void 로그인_실패() {
+        LoginForm loginForm = new LoginForm();
+        loginForm.setEmail("abc@gmail.com");
+        loginForm.setPassword("12346789");
+        userService.userLogin(loginForm);
+        assertThat(userService.userLogin(loginForm)).isEqualTo(false);
     }
 }

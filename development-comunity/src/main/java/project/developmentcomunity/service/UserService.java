@@ -1,5 +1,6 @@
 package project.developmentcomunity.service;
 
+import project.developmentcomunity.controller.LoginForm;
 import project.developmentcomunity.domain.User;
 import project.developmentcomunity.repository.UserRepository;
 
@@ -53,5 +54,12 @@ public class UserService {
      */
     public Optional<User> inqUserId(Long userId) {
         return userRepository.inqUserId(userId);
+    }
+
+    /**
+     * 로그인 처리
+     */
+    public Boolean userLogin(LoginForm loginForm) {
+        return loginForm.getPassword().equals(userRepository.inqUserPassword(loginForm.getEmail()));
     }
 }

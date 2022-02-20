@@ -6,12 +6,12 @@
         <h1>IRWW - 개발자 커뮤니티</h1>
         <h3>I did it right, why is this not working?</h3>
         <p>로그인</p>
-        <form>
+        <form action="/login" method="post" id="loginForm">
             <div class="form-group">
-                <label for="loginId">아이디</label>
-                <input type="text" id="loginId" name="loginId" placeholder="ID">
-                <label for="loginPassword">비밀번호</label>
-                <input type="text" id="loginPassword" name="loginPassword" placeholder="Password">
+                <label for="email">아이디(E-mail)</label>
+                <input type="text" id="email" name="email" placeholder="E-mail">
+                <label for="password">비밀번호</label>
+                <input type="text" id="password" name="password" placeholder="Password">
             </div>
             <button type="submit" id="btnLogin">로그인</button>
         </form>

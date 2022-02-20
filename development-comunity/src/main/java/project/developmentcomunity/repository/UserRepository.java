@@ -2,6 +2,7 @@ package project.developmentcomunity.repository;
 
 import project.developmentcomunity.domain.User;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public interface UserRepository {
@@ -17,4 +18,7 @@ public interface UserRepository {
 
     // 회원ID 조회
     Optional<User> inqUserId(Long userId);
+
+    // 회원 password 조회
+    String inqUserPassword(String userEmail);
 }

@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import project.developmentcomunity.domain.User;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.util.HashMap;
@@ -53,6 +54,11 @@ public class JdbcTemplateUserRepository implements UserRepository {
     public Optional<User> inqUserId(Long userId) {
         List<User> result = jdbcTemplate.query("select * from user where user_id = ?", userRowMapper(), userId);
         return result.stream().findAny();
+    }
+
+    @Override
+    public String inqUserPassword(String userEmail) {
+        return jdbcTemplate.queryForObject("select password from user where email = ?", String.class, userEmail);
     }
 
     private RowMapper<User> userRowMapper() {

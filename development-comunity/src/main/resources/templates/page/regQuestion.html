@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <h1>IRWW - 개발자 커뮤니티</h1>
+        <h3>I did it right, why is this not working?</h3>
+    </div>
+    <div>
+        <form action="/page/registration/mainPage" method="post">
+            <div class="form-group">
+                <label for="questionTitle">제목</label>
+                <input type="text" id="questionTitle" name="questionTitle" placeholder="제목을 입력하세요"><br>
+                <label for="description">내용</label>
+                <textarea id="description" name="description" rows="10" placeholder="내용을 입력하세요"></textarea>
+            </div>
+            <button type="submit" id="btnSave">저장</button>
+        </form>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

@@ -29,7 +29,7 @@
         </table>
     </div>
     <div>
-        <input type="button" value="등록" onclick="location.href='/page/registration'"/>
+        <input type="button" value="등록"  th:onclick="'location.href=\'' + @{/page/registration(linkId=${linkId}, idUser=${idUser})} + '\''"/>
     </div>
 </div> <!-- /container -->
 </body>

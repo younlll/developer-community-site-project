@@ -34,8 +34,6 @@ public class QuestionService {
     public void registrationQuestion(Question question) {
         long questionId = numberingQuestionId();
         question.setQuestionId(questionId);
-        System.out.println("question title : " + question.getQuestionTitle());
-        System.out.println("question description : " + question.getDescription());
         questionRepository.regQuestion(question);
     }
 }

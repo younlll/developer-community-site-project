@@ -5,9 +5,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import project.developmentcomunity.domain.Question;
-import project.developmentcomunity.domain.User;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +49,8 @@ public class JdbcTemplateQuestionRepository implements QuestionRepository {
         parm.put("enabled_yn", "Y");
         parm.put("views", 0L);
         parm.put("description", question.getDescription());
+        parm.put("reg_dttm", new Timestamp(System.currentTimeMillis()));
+        parm.put("upd_dttm", new Timestamp(System.currentTimeMillis()));
 
         jdbcInsert.execute(new MapSqlParameterSource(parm));
     }

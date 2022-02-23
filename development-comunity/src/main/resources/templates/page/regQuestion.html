@@ -7,7 +7,7 @@
         <h3>I did it right, why is this not working?</h3>
     </div>
     <div>
-        <form action="/page/registration/mainPage" method="post">
+        <form th:action="@{/page/registration/mainPage(linkId=${linkId}, idUser=${idUser})}" method="post">
             <div class="form-group">
                 <label for="questionTitle">제목</label>
                 <input type="text" id="questionTitle" name="questionTitle" placeholder="제목을 입력하세요"><br>
@@ -16,6 +16,10 @@
             </div>
             <button type="submit" id="btnSave">저장</button>
         </form>
+    </div>
+    <div>
+        <input type="hidden" id="linkId" th:value="${linkId}" th:attr="name='linkId'"/>
+        <input type="hidden" id="idUser" th:value="${idUser}" th:attr="name='idUser'"/>
     </div>
 </div> <!-- /container -->
 </body>

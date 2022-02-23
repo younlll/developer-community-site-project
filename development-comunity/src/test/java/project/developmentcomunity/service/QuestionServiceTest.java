@@ -36,19 +36,52 @@ class QuestionServiceTest {
 
         assertThat(question.getQuestionId()).isEqualTo(questionId);
     }
-//
-//    @Test
-//    void 질문_상세_조회() {
-//
-//    }
-//
-//    @Test
-//    void 질문_삭제() {
-//
-//    }
-//
-//    @Test
-//    void 질문_수정() {
-//
-//    }
+
+    @Test
+    void 질문_상세_조회() {
+        long questionId = 1L;
+        long categoryId = 1100L;
+        Question question = questionService.inqQuestionDetail(questionId, categoryId);
+
+        assertThat(question.getDescription()).isEqualTo("backend question description test ver1.0");
+    }
+
+    @Test
+    void 질문_삭제() {
+        Question question = new Question();
+        long questionId = questionService.numberingQuestionId();
+        question.setQuestionId(questionId);
+        question.setCategoryId(1200L);
+        question.setQuestionTitle("registration quest backend title ver1.2");
+        question.setUserId(1L);
+        question.setEnabledYn("Y");
+        question.setViews(0L);
+        question.setDescription("registration quest backend description test ver1.2");
+
+        questionService.registrationQuestion(question);
+        questionService.delQuestion(questionId, 1100L);
+        assertThat(questionService.inqQuestionDetail(questionId, 1100L).isPresent()).isEqualTo(false);
+    }
+
+    @Test
+    void 질문_수정() {
+        Question question = new Question();
+        long questionId = questionService.numberingQuestionId();
+        question.setQuestionId(questionId);
+        question.setCategoryId(1300L);
+        question.setQuestionTitle("registration quest backend title ver1.3");
+        question.setUserId(1L);
+        question.setEnabledYn("Y");
+        question.setViews(0L);
+        question.setDescription("registration quest backend description test ver1.3");
+
+        questionService.registrationQuestion(question);
+
+        Question question2 = questionService.inqQuestionDetail(questionId, categoryId);
+        question2.setDescription("registration quest backend description update test ver1.3");
+        questionService.updQuestionDetail(question2);
+
+        Question question3 = questionService.inqQuestionDetail(question2.getQuestionId(), 1300L);
+        assertThat(question3.getDescription()).isEqualTo("registration quest backend description update test ver1.3");
+    }
 }

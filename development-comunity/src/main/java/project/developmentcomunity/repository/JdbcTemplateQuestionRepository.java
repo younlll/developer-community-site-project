@@ -77,7 +77,11 @@ public class JdbcTemplateQuestionRepository implements QuestionRepository {
 
     @Override
     public void delQuestion(Question question) {
-        jdbcTemplate.update("delete from question_by_category\n" +
+//        jdbcTemplate.update("delete from question_by_category\n" +
+//                "where question_id = ?\n" +
+//                "   and category_id = ?", question.getQuestionId(), question.getCategoryId());
+        jdbcTemplate.update("update question_by_category\n" +
+                "set enabled_yn = 'N'\n" +
                 "where question_id = ?\n" +
                 "   and category_id = ?", question.getQuestionId(), question.getCategoryId());
     }

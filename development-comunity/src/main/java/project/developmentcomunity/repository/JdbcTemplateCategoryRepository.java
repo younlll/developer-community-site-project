@@ -28,6 +28,7 @@ public class JdbcTemplateCategoryRepository implements CategoryRepository {
                 "from question_by_category qbc\n" +
                 "   , user u\n" +
                 "where qbc.user_id = u.user_id\n" +
+                "   and qbc.enabled_yn = 'Y'\n" +
                 "   and qbc.category_id = ?", questionRowMapper(), categoryId);
     }
 

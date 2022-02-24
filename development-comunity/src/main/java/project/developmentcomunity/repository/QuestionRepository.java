@@ -9,4 +9,6 @@ public interface QuestionRepository {
     Long inqMaxQuestionId();
     Optional<Question> inqQuestionId(long questionId);
     void regQuestion(Question question);
+    Optional<Question> inqQuestionDetail(long questionId, long categoryId);
+    void updQuestionDetail(Question question);
 }

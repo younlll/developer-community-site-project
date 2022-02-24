@@ -41,7 +41,7 @@ class QuestionServiceTest {
     void 질문_상세_조회() {
         long questionId = 1L;
         long categoryId = 1100L;
-        Question question = questionService.inqQuestionDetail(questionId, categoryId);
+        Question question = questionService.inqQuestionDetail(questionId, categoryId).get();
 
         assertThat(question.getDescription()).isEqualTo("backend question description test ver1.0");
     }
@@ -77,11 +77,11 @@ class QuestionServiceTest {
 
         questionService.registrationQuestion(question);
 
-        Question question2 = questionService.inqQuestionDetail(questionId, categoryId);
+        Question question2 = questionService.inqQuestionDetail(questionId, 1300L).get();
         question2.setDescription("registration quest backend description update test ver1.3");
         questionService.updQuestionDetail(question2);
 
-        Question question3 = questionService.inqQuestionDetail(question2.getQuestionId(), 1300L);
+        Question question3 = questionService.inqQuestionDetail(question2.getQuestionId(), 1300L).get();
         assertThat(question3.getDescription()).isEqualTo("registration quest backend description update test ver1.3");
     }
 }

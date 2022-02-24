@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import project.developmentcomunity.domain.Question;
+import project.developmentcomunity.domain.User;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
@@ -53,6 +54,25 @@ public class JdbcTemplateQuestionRepository implements QuestionRepository {
         parm.put("upd_dttm", new Timestamp(System.currentTimeMillis()));
 
         jdbcInsert.execute(new MapSqlParameterSource(parm));
+    }
+
+    @Override
+    public Optional<Question> inqQuestionDetail(long questionId, long categoryId) {
+        List<Question> result = jdbcTemplate.query("select u.nick_name, qbc.*\n" +
+                "from question_by_category qbc\n" +
+                "   , user u\n" +
+                "where qbc.user_id = u.user_id\n" +
+                "   and qbc.question_id = ?\n" +
+                "   and qbc.category_id = ?", questionRowMapper(), questionId, categoryId);
+        return result.stream().findAny();
+    }
+
+    @Override
+    public void updQuestionDetail(Question question) {
+        jdbcTemplate.update("update  question_by_category\n" +
+                "set description = ?\n" +
+                "where question_id = ?\n" +
+                "   and category_id = ?", question.getDescription(), question.getQuestionId(), question.getCategoryId());
     }
 
     private RowMapper<Question> questionRowMapper() {

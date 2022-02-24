@@ -10,17 +10,16 @@
         <table>
             <thead>
                 <tr>
-                    <th>순번</th>
                     <th>제목</th>
                     <th>작성자</th>
                     <th>조회수</th>
                     <th>등록일</th>
+                    <th style="visibility:hidden;position:absolute;"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="qna:${qnas}">
-                    <td></td>
-                    <td th:text="${qna.questionTitle}"></td>
+                    <td><a th:href="@{/page/questionDetail(linkId=${linkId}, questionId=${qna.questionId})}" th:text="${qna.questionTitle}"></a></td>
                     <td th:text="${qna.nickName}"></td>
                     <td th:text="${qna.views}"></td>
                     <td th:text="${qna.regDttm}"></td>

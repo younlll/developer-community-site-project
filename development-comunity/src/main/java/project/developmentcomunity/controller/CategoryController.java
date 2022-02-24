@@ -18,8 +18,8 @@ public class CategoryController {
     @Autowired CategoryService categoryService;
 
     @GetMapping("/page/qnaList")
-    public String qnaList(@RequestParam("linkId") long linkId, @RequestParam("idUser") long idUser, Category category, Model model) {
-        List<Question> qnas = categoryService.inqQuestionByCategory(category.getCategoryId());
+    public String qnaList(@RequestParam("linkId") long linkId, @RequestParam("idUser") long idUser, Model model) {
+        List<Question> qnas = categoryService.inqQuestionByCategory(linkId);
         model.addAttribute("qnas", qnas);
         model.addAttribute("linkId", linkId);
         model.addAttribute("idUser", idUser);

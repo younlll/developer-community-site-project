@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <h1>IRWW - 개발자 커뮤니티</h1>
+        <h3>I did it right, why is this not working?</h3>
+        <h3>상세페이지</h3>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>조회수</th>
+                    <th>등록일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${questionDetail.questionTitle}"></td>
+                    <td th:text="${questionDetail.nickName}"></td>
+                    <td th:text="${questionDetail.views}"></td>
+                    <td th:text="${questionDetail.regDttm}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/page/updQuestion(linkId=${linkId}, questionId=${questionId})}" method="post">
+            <label for="description"></label>
+            <textarea id="description" name="description" th:text="${questionDetail.description}"></textarea>
+            <button type="submit" id="btnUpd">수정</button>
+<!--            <input type="button" value="수정"  method="post" th:onclick="'location.href=\'' + @{/page/updQuestion(linkId=${linkId}, idUser=${idUser})} + '\''"/>-->
+        </form>
+    </div>
+    <div>
+<!--        <input type="button" value="수정"  th:onclick="'location.href=\'' + @{/page/updQuestion(linkId=${linkId}, idUser=${idUser})} + '\''"/>-->
+<!--        <input type="button" value="삭제"  th:onclick="'location.href=\'' + @{/page/registration(linkId=${linkId}, idUser=${idUser})} + '\''"/>-->
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

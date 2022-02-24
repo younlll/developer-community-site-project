@@ -36,4 +36,18 @@ public class QuestionService {
         question.setQuestionId(questionId);
         questionRepository.regQuestion(question);
     }
+
+    /**
+     * 질문 상세조회
+     */
+    public Optional<Question> inqQuestionDetail(long questionId, long categoryId) {
+        return questionRepository.inqQuestionDetail(questionId, categoryId);
+    }
+
+    /**
+     * 질문 수정
+     */
+    public void updQuestionDetail(Question question) {
+        questionRepository.updQuestionDetail(question);
+    }
 }

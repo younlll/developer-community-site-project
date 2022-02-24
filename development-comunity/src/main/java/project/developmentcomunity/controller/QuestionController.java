@@ -54,18 +54,34 @@ public class QuestionController {
     }
 
     @PostMapping("/page/updQuestion")
-    public void updQuestion(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, @RequestParam("idUser") long idUser, Question question) {
+    public String updQuestion(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, @RequestParam("idUser") long idUser, Question question, Model model) {
         question.setQuestionId(questionId);
         question.setCategoryId(linkId);
         question.setUserId(idUser);
         questionService.updQuestionDetail(question);
+
+        List<Category> categories = categoryService.inqAllCategoryList();
+        User loginUser = new User();
+        loginUser.setIdUser(idUser);
+        model.addAttribute("categories", categories);
+        model.addAttribute("loginUser", loginUser);
+
+        return "page/mainPage";
     }
 
     @GetMapping("/page/delQuestion")
-    public void delQuestion(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, @RequestParam("idUser") long idUser, Question question) {
+    public String delQuestion(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, @RequestParam("idUser") long idUser, Question question, Model model) {
         question.setQuestionId(questionId);
         question.setCategoryId(linkId);
         question.setUserId(idUser);
         questionService.delQuestion(question);
+
+        List<Category> categories = categoryService.inqAllCategoryList();
+        User loginUser = new User();
+        loginUser.setIdUser(idUser);
+        model.addAttribute("categories", categories);
+        model.addAttribute("loginUser", loginUser);
+
+        return "page/mainPage";
     }
 }

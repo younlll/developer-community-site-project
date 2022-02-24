@@ -26,16 +26,14 @@
                 </tr>
             </tbody>
         </table>
-        <form th:action="@{/page/updQuestion(linkId=${linkId}, questionId=${questionId})}" method="post">
+        <form th:action="@{/page/updQuestion(linkId=${linkId}, questionId=${questionId}, idUser=${idUser})}" method="post">
             <label for="description"></label>
             <textarea id="description" name="description" th:text="${questionDetail.description}"></textarea>
             <button type="submit" id="btnUpd">수정</button>
-<!--            <input type="button" value="수정"  method="post" th:onclick="'location.href=\'' + @{/page/updQuestion(linkId=${linkId}, idUser=${idUser})} + '\''"/>-->
         </form>
     </div>
     <div>
-<!--        <input type="button" value="수정"  th:onclick="'location.href=\'' + @{/page/updQuestion(linkId=${linkId}, idUser=${idUser})} + '\''"/>-->
-<!--        <input type="button" value="삭제"  th:onclick="'location.href=\'' + @{/page/registration(linkId=${linkId}, idUser=${idUser})} + '\''"/>-->
+        <input type="button" value="삭제"  th:onclick="'location.href=\'' + @{/page/delQuestion(linkId=${linkId}, questionId=${questionId}, idUser=${idUser})} + '\''"/>
     </div>
 </div> <!-- /container -->
 </body>

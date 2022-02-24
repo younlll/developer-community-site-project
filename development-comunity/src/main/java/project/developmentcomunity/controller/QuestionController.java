@@ -44,23 +44,28 @@ public class QuestionController {
     }
 
     @GetMapping("/page/questionDetail")
-    public String inqQuestionDetail(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, Model model) {
+    public String inqQuestionDetail(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, @RequestParam("idUser") long idUser, Model model) {
         Question questionDetail = questionService.inqQuestionDetail(questionId, linkId).get();
         model.addAttribute("questionDetail", questionDetail);
         model.addAttribute("linkId", linkId);
         model.addAttribute("questionId", questionId);
+        model.addAttribute("idUser", idUser);
         return "page/questionDetail";
     }
 
     @PostMapping("/page/updQuestion")
-    public void updQuestion(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, Question question) {
+    public void updQuestion(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, @RequestParam("idUser") long idUser, Question question) {
         question.setQuestionId(questionId);
         question.setCategoryId(linkId);
+        question.setUserId(idUser);
         questionService.updQuestionDetail(question);
     }
 
     @GetMapping("/page/delQuestion")
-    public void delQuestion(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId) {
-
+    public void delQuestion(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, @RequestParam("idUser") long idUser, Question question) {
+        question.setQuestionId(questionId);
+        question.setCategoryId(linkId);
+        question.setUserId(idUser);
+        questionService.delQuestion(question);
     }
 }

@@ -11,4 +11,5 @@ public interface QuestionRepository {
     void regQuestion(Question question);
     Optional<Question> inqQuestionDetail(long questionId, long categoryId);
     void updQuestionDetail(Question question);
+    void delQuestion(Question question);
 }

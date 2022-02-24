@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.developmentcomunity.domain.Category;
 import project.developmentcomunity.domain.Question;
+import project.developmentcomunity.domain.User;
 import project.developmentcomunity.service.CategoryService;
 
 import java.util.List;

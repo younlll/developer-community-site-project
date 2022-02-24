@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <tr th:each="qna:${qnas}">
-                    <td><a th:href="@{/page/questionDetail(linkId=${linkId}, questionId=${qna.questionId})}" th:text="${qna.questionTitle}"></a></td>
+                    <td><a th:href="@{/page/questionDetail(linkId=${linkId}, questionId=${qna.questionId}, idUser=${idUser})}" th:text="${qna.questionTitle}"></a></td>
                     <td th:text="${qna.nickName}"></td>
                     <td th:text="${qna.views}"></td>
                     <td th:text="${qna.regDttm}"></td>

@@ -69,10 +69,17 @@ public class JdbcTemplateQuestionRepository implements QuestionRepository {
 
     @Override
     public void updQuestionDetail(Question question) {
-        jdbcTemplate.update("update  question_by_category\n" +
+        jdbcTemplate.update("update question_by_category\n" +
                 "set description = ?\n" +
                 "where question_id = ?\n" +
                 "   and category_id = ?", question.getDescription(), question.getQuestionId(), question.getCategoryId());
+    }
+
+    @Override
+    public void delQuestion(Question question) {
+        jdbcTemplate.update("delete from question_by_category\n" +
+                "where question_id = ?\n" +
+                "   and category_id = ?", question.getQuestionId(), question.getCategoryId());
     }
 
     private RowMapper<Question> questionRowMapper() {

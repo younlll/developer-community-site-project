@@ -48,6 +48,21 @@ public class QuestionService {
      * 질문 수정
      */
     public void updQuestionDetail(Question question) {
+        Question questionDetail = questionRepository.inqQuestionDetail(question.getQuestionId(), question.getCategoryId()).get();
+        if(questionDetail.getUserId() != question.getUserId()) {
+            throw new IllegalStateException("작성자와 로그인 계정이 다릅니다(본인의 게시물만 수정할 수 있습니다)");
+        }
         questionRepository.updQuestionDetail(question);
+    }
+
+    /**
+     * 질문 삭제
+     */
+    public void delQuestion(Question question) {
+        Question questionDetail = questionRepository.inqQuestionDetail(question.getQuestionId(), question.getCategoryId()).get();
+        if(questionDetail.getUserId() != question.getUserId()) {
+            throw new IllegalStateException("작성자와 로그인 계정이 다릅니다(본인의 게시물만 삭제할 수 있습니다)");
+        }
+        questionRepository.delQuestion(question);
     }
 }

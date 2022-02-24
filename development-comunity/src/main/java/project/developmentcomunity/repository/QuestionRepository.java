@@ -2,6 +2,7 @@ package project.developmentcomunity.repository;
 
 import project.developmentcomunity.domain.Question;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface QuestionRepository {
@@ -14,4 +15,6 @@ public interface QuestionRepository {
     void delQuestion(Question question);
     void updQuestionView(long questionId, long categoryId);
     Long inqQuestionView(long questionId, long categoryId);
+    List<Question> inqQuestionbyTitle(long categoryId, String tile);
+    List<Question> inqQuestionbyDescription(long categoryId, String description);
 }

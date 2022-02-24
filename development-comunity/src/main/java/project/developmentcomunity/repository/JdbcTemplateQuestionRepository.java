@@ -104,6 +104,30 @@ public class JdbcTemplateQuestionRepository implements QuestionRepository {
         return result;
     }
 
+    @Override
+    public List<Question> inqQuestionbyTitle(long categoryId, String title) {
+        String likeTitle = "%" + title + "%";
+        return jdbcTemplate.query("select u.nick_name, qbc.*\n" +
+                "from question_by_category qbc\n" +
+                "   , user u\n" +
+                "where qbc.user_id = u.user_id\n" +
+                "   and qbc.enabled_yn = 'Y'\n" +
+                "   and qbc.category_id = ?\n" +
+                "   and qbc.question_title like ?", questionRowMapper(), categoryId, likeTitle);
+    }
+
+    @Override
+    public List<Question> inqQuestionbyDescription(long categoryId, String description) {
+        String likeDescription = "%" + description + "%";
+        return jdbcTemplate.query("select u.nick_name, qbc.*\n" +
+                "from question_by_category qbc\n" +
+                "   , user u\n" +
+                "where qbc.user_id = u.user_id\n" +
+                "   and qbc.enabled_yn = 'Y'\n" +
+                "   and qbc.category_id = ?\n" +
+                "   and qbc.description like ?", questionRowMapper(), categoryId, likeDescription);
+    }
+
     private RowMapper<Question> questionRowMapper() {
         return (rs, rowNum) -> {
             Question question = new Question();

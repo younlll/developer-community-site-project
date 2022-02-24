@@ -4,6 +4,7 @@ import project.developmentcomunity.domain.Question;
 import project.developmentcomunity.repository.QuestionRepository;
 import project.developmentcomunity.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class QuestionService {
@@ -67,7 +68,24 @@ public class QuestionService {
         questionRepository.delQuestion(question);
     }
 
+    /**
+     * 질문 조회수 단건 조회
+     */
     public Long inqQuestionView(long questionId, long categoryId) {
         return questionRepository.inqQuestionView(questionId, categoryId);
+    }
+
+    /**
+     * 제목검색
+     */
+    public List<Question> inqQuestionbyTitle(long categoryId, String title) {
+        return questionRepository.inqQuestionbyTitle(categoryId, title);
+    }
+
+    /**
+     * 내용검색
+     */
+    public List<Question> inqQuestionbyDescription(long categoryId, String description) {
+        return questionRepository.inqQuestionbyDescription(categoryId, description);
     }
 }

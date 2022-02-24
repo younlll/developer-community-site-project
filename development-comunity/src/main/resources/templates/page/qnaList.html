@@ -7,6 +7,20 @@
         <h3>I did it right, why is this not working?</h3>
     </div>
     <div>
+        <form th:action="@{/search(linkId=${linkId}, idUser=${idUser})}" method="post" id="SearchForm">
+            <div class="form-group">
+                <select name="search" id="search">
+                    <option value="1">전체</option>
+                    <option value="2">제목</option>
+                    <option value="3">내용</option>
+                </select>
+                <label for="searchContent">검색내용</label>
+                <input type="text" id="searchContent" name="searchContent" placeholder="검색할 내용을 입력하세요">
+            </div>
+            <button type="submit" id="btnSearch">검색</button>
+        </form>
+    </div>
+    <div>
         <table>
             <thead>
                 <tr>

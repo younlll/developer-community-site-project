@@ -84,4 +84,36 @@ public class QuestionController {
 
         return "page/mainPage";
     }
+
+    @PostMapping("/search")
+    public String searchQuestion(@RequestParam("linkId") long linkId, @RequestParam("idUser") long idUser, SearchForm searchForm, Model model) {
+        String searchNum = searchForm.getSearch();
+        List<Question> qnas;
+        System.out.println("일단여기");
+        switch (searchNum) {
+            case "1":
+                qnas = categoryService.inqQuestionByCategory(linkId);
+                model.addAttribute("qnas", qnas);
+                model.addAttribute("linkId", linkId);
+                model.addAttribute("idUser", idUser);
+                System.out.println("1111111111111");
+                break;
+            case "2":
+                qnas = questionService.inqQuestionbyTitle(linkId, searchForm.getSearchContent());
+                model.addAttribute("qnas", qnas);
+                model.addAttribute("linkId", linkId);
+                model.addAttribute("idUser", idUser);
+                System.out.println("2222222222");
+                break;
+            case "3":
+                qnas = questionService.inqQuestionbyDescription(linkId, searchForm.getSearchContent());
+                model.addAttribute("qnas", qnas);
+                model.addAttribute("linkId", linkId);
+                model.addAttribute("idUser", idUser);
+                System.out.println("33333333333");
+                break;
+        }
+
+        return "page/qnaList";
+    }
 }

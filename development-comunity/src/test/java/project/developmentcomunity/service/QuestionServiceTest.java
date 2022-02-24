@@ -1,5 +1,6 @@
 package project.developmentcomunity.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -59,7 +60,7 @@ class QuestionServiceTest {
         question.setDescription("registration quest backend description test ver1.2");
 
         questionService.registrationQuestion(question);
-        questionService.delQuestion(questionId, 1100L);
+        questionService.delQuestion(question);
         assertThat(questionService.inqQuestionDetail(questionId, 1100L).isPresent()).isEqualTo(false);
     }
 
@@ -84,4 +85,53 @@ class QuestionServiceTest {
         Question question3 = questionService.inqQuestionDetail(question2.getQuestionId(), 1300L).get();
         assertThat(question3.getDescription()).isEqualTo("registration quest backend description update test ver1.3");
     }
+
+    @Test
+    void 다른_계정_질문_삭제_오류() {
+        Question question = new Question();
+        long questionId = questionService.numberingQuestionId();
+        question.setQuestionId(questionId);
+        question.setCategoryId(1300L);
+        question.setQuestionTitle("registration quest backend title ver1.3");
+        question.setUserId(1L);
+        question.setEnabledYn("Y");
+        question.setViews(0L);
+        question.setDescription("registration quest backend description test ver1.3");
+
+        questionService.registrationQuestion(question);
+
+        Question question1 = new Question();
+        question1.setQuestionId(questionId);
+        question1.setCategoryId(1300L);
+        question1.setUserId(2L);
+
+        IllegalStateException e = Assertions.assertThrows(IllegalStateException.class, () -> questionService.delQuestion(question1));
+        assertThat(e.getMessage()).isEqualTo("작성자와 로그인 계정이 다릅니다(본인의 게시물만 삭제할 수 있습니다)");
+    }
+
+    @Test
+    void 다른_계정_질문_수정_오류() {
+        Question question = new Question();
+        long questionId = questionService.numberingQuestionId();
+        question.setQuestionId(questionId);
+        question.setCategoryId(1300L);
+        question.setQuestionTitle("registration quest backend title ver1.3");
+        question.setUserId(1L);
+        question.setEnabledYn("Y");
+        question.setViews(0L);
+        question.setDescription("registration quest backend description test ver1.3");
+
+        questionService.registrationQuestion(question);
+
+        Question question1 = new Question();
+        question1.setQuestionId(questionId);
+        question1.setCategoryId(1300L);
+        question1.setUserId(2L);
+        question1.setDescription("registration quest backend description test ver1.3 update");
+
+        IllegalStateException e = Assertions.assertThrows(IllegalStateException.class, () -> questionService.updQuestionDetail(question1));
+        assertThat(e.getMessage()).isEqualTo("작성자와 로그인 계정이 다릅니다(본인의 게시물만 수정할 수 있습니다)");
+    }
+
+
 }

@@ -28,7 +28,7 @@
         </table>
         <form th:action="@{/page/updQuestion(linkId=${linkId}, questionId=${questionId}, idUser=${idUser})}" method="post">
             <label for="description"></label>
-            <textarea id="description" name="description" th:text="${questionDetail.description}"></textarea>
+            <textarea id="description" name="description" th:text="${questionDetail.description}"></textarea><br>
             <button type="submit" id="btnUpd">수정</button>
         </form>
     </div>

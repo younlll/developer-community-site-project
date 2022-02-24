@@ -5,6 +5,9 @@
     <div>
         <h1>IRWW - 개발자 커뮤니티</h1>
         <h3>I did it right, why is this not working?</h3>
+        <a th:href="@{/individual(idUser=${loginUser.idUser})}">마이페이지</a>
+    </div>
+    <div>
         <ul>
             <li th:each="category:${categories}">
                 <a th:href="@{/page/qnaList(linkId=${category.categoryId}, idUser=${loginUser.idUser})}" th:text="${category.categoryName}"></a>

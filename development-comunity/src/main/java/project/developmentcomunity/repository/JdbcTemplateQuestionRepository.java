@@ -128,6 +128,16 @@ public class JdbcTemplateQuestionRepository implements QuestionRepository {
                 "   and qbc.description like ?", questionRowMapper(), categoryId, likeDescription);
     }
 
+    @Override
+    public List<Question> inqQuestionByUser(long userId) {
+        return jdbcTemplate.query("select u.nick_name, qbc.*\n" +
+                "from question_by_category qbc\n" +
+                "   , user u\n" +
+                "where qbc.user_id = u.user_id\n" +
+                "   and qbc.enabled_yn = 'Y'\n" +
+                "   and qbc.user_id = ?", questionRowMapper(), userId);
+    }
+
     private RowMapper<Question> questionRowMapper() {
         return (rs, rowNum) -> {
             Question question = new Question();

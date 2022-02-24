@@ -17,4 +17,5 @@ public interface QuestionRepository {
     Long inqQuestionView(long questionId, long categoryId);
     List<Question> inqQuestionbyTitle(long categoryId, String tile);
     List<Question> inqQuestionbyDescription(long categoryId, String description);
+    List<Question> inqQuestionByUser(long userId);
 }

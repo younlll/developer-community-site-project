@@ -88,4 +88,11 @@ public class QuestionService {
     public List<Question> inqQuestionbyDescription(long categoryId, String description) {
         return questionRepository.inqQuestionbyDescription(categoryId, description);
     }
+
+    /**
+     * 사용자별 질문 검색
+     */
+    public List<Question> inqQuestionByUser(long userId) {
+        return questionRepository.inqQuestionByUser(userId);
+    }
 }

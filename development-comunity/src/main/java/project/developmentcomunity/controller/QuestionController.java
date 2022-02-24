@@ -89,7 +89,7 @@ public class QuestionController {
     public String searchQuestion(@RequestParam("linkId") long linkId, @RequestParam("idUser") long idUser, SearchForm searchForm, Model model) {
         String searchNum = searchForm.getSearch();
         List<Question> qnas;
-        
+
         switch (searchNum) {
             case "1":
                 qnas = categoryService.inqQuestionByCategory(linkId);

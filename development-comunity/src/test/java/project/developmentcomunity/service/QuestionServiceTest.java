@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import project.developmentcomunity.domain.Question;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -133,5 +135,11 @@ class QuestionServiceTest {
         assertThat(e.getMessage()).isEqualTo("작성자와 로그인 계정이 다릅니다(본인의 게시물만 수정할 수 있습니다)");
     }
 
+    @Test
+    void 질문_조회수_증가() {
+        long bfViews = questionService.inqQuestionView(1L, 1100L);
 
+        Question question = questionService.inqQuestionDetail(1L, 1100L).get();
+        assertThat(question.getViews()).isEqualTo(bfViews + 1);
+    }
 }

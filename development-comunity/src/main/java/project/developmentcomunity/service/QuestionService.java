@@ -41,6 +41,7 @@ public class QuestionService {
      * 질문 상세조회
      */
     public Optional<Question> inqQuestionDetail(long questionId, long categoryId) {
+        questionRepository.updQuestionView(questionId, categoryId);
         return questionRepository.inqQuestionDetail(questionId, categoryId);
     }
 
@@ -64,5 +65,9 @@ public class QuestionService {
             throw new IllegalStateException("작성자와 로그인 계정이 다릅니다(본인의 게시물만 삭제할 수 있습니다)");
         }
         questionRepository.delQuestion(question);
+    }
+
+    public Long inqQuestionView(long questionId, long categoryId) {
+        return questionRepository.inqQuestionView(questionId, categoryId);
     }
 }

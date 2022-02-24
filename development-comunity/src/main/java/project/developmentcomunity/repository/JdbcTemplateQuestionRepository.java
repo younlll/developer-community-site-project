@@ -86,6 +86,24 @@ public class JdbcTemplateQuestionRepository implements QuestionRepository {
                 "   and category_id = ?", question.getQuestionId(), question.getCategoryId());
     }
 
+    @Override
+    public void updQuestionView(long questionId, long categoryId) {
+        jdbcTemplate.update("update question_by_category\n" +
+                "set views = views + 1\n" +
+                "where question_id = ?\n" +
+                "   and category_id = ?", questionId, categoryId);
+    }
+
+    @Override
+    public Long inqQuestionView(long questionId, long categoryId) {
+        Long result = jdbcTemplate.queryForObject("select views \n" +
+                "from question_by_category\n" +
+                "where question_id = ?\n" +
+                "   and category_id = ?\n" +
+                "   and enabled_yn = 'Y'", Long.class, questionId, categoryId);
+        return result;
+    }
+
     private RowMapper<Question> questionRowMapper() {
         return (rs, rowNum) -> {
             Question question = new Question();

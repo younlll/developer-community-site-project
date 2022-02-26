@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import project.developmentcomunity.repository.*;
 import project.developmentcomunity.service.CategoryService;
 import project.developmentcomunity.service.QuestionService;
+import project.developmentcomunity.service.ReplyService;
 import project.developmentcomunity.service.UserService;
 
 import javax.sql.DataSource;
@@ -48,5 +49,15 @@ public class SpringConfig {
     @Bean
     public QuestionRepository questionRepository() {
         return new JdbcTemplateQuestionRepository(dataSource);
+    }
+
+    @Bean
+    public ReplyService replyService() {
+        return new ReplyService(replyRepository());
+    }
+
+    @Bean
+    public ReplyRepository replyRepository() {
+        return new JdbcTemplateReplyRepository(dataSource);
     }
 }

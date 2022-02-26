@@ -33,7 +33,7 @@ public class IndividualController {
     @GetMapping("/individual/main")
     public String returnMainPage(@RequestParam("idUser") long idUser, Model model) {
         User loginUser = userService.inqUserId(idUser).get();
-        model.addAttribute("loginUser", loginUser);
+        model.addAttribute("loginUser",  loginUser);
         List<Category>categories = categoryService.inqAllCategoryList();
         model.addAttribute("categories", categories);
 

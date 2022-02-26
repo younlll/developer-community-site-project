@@ -35,6 +35,15 @@
     <div>
         <input type="button" value="삭제"  th:onclick="'location.href=\'' + @{/page/delQuestion(linkId=${linkId}, questionId=${questionId}, idUser=${idUser})} + '\''"/>
     </div>
+    <div>
+        <h3>댓글</h3>
+        <
+        <form  th:action="@{/page/registration/reply(linkId=${linkId}, questionId=${questionId}, idUser=${idUser})}" method="post">
+            <label for="replyDescription"></label>
+            <input type="text" id="replyDescription" name="replyDescription" placeholder="내용을 입력하세요" />
+            <button type="submit" id="btnSave">등록</button>
+        </form>
+    </div>
 </div> <!-- /container -->
 </body>
 </html>

@@ -44,4 +44,20 @@ public class ReplyServiceTest {
 
         assertThat(replyService.inqReplyId(replyId).get().getReplyDescription()).isEqualTo(reply.getReplyDescription());
     }
+
+    @Test
+    void 답글_삭제() {
+        Reply reply = new Reply();
+        long replyId = replyService.numberingReplyId(1L, 1100L);
+        reply.setReply_id(replyId);
+        reply.setQuestion_id(1L);
+        reply.setCategory_id(1100L);
+        reply.setUser_id(2L);
+        reply.setReplyDescription("reply description test");
+
+        replyService.regReplyByQuesiton(reply);
+        replyService.delReplyByQuestion(replyId);
+        
+        assertThat(replyService.inqReplyId(replyId).isPresent()).isEqualTo(false);
+    }
 }

@@ -75,6 +75,18 @@ public class JdbcTemplateReplyRepository implements ReplyRepository {
                 "   and rbq.enabled_yn = 'Y'", replyListRowMapper(), questionId, categoryId);
     }
 
+    @Override
+    public List<Reply> inqReplyByUser(long userId) {
+        return jdbcTemplate.query("select qbc.question_title question_title\n" +
+                "   , rbq.*\n" +
+                "from reply_by_question rbq\n" +
+                "   , question_by_category qbc\n" +
+                "where rbq.user_id = ?\n" +
+                "   and rbq.question_id = qbc.question_id\n" +
+                "   and rbq.category_id = qbc.category_id\n" +
+                "   and rbq.enabled_yn = 'Y'", replyByUserListRowMapper(), userId);
+    }
+
     private RowMapper<Reply> replyRowMapper() {
         return (rs, rowNum) -> {
             Reply reply = new Reply();
@@ -96,6 +108,19 @@ public class JdbcTemplateReplyRepository implements ReplyRepository {
             reply.setQuestionId(rs.getLong("question_id"));
             reply.setUserId(rs.getLong("user_id"));
             reply.setNickName(rs.getString("nick_name"));
+            reply.setReplyDescription(rs.getString("description"));
+            reply.setRegDttm(rs.getString("reg_dttm"));
+            return reply;
+        };
+    }
+
+    private RowMapper<Reply> replyByUserListRowMapper() {
+        return (rs, rowNum) -> {
+            Reply reply = new Reply();
+            reply.setReplyId(rs.getLong("reply_id"));
+            reply.setCategoryId(rs.getLong("category_id"));
+            reply.setQuestionId(rs.getLong("question_id"));
+            reply.setQuestionTitle(rs.getString("question_title"));
             reply.setReplyDescription(rs.getString("description"));
             reply.setRegDttm(rs.getString("reg_dttm"));
             return reply;

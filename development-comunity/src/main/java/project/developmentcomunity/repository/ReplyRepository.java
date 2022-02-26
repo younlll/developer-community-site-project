@@ -14,5 +14,5 @@ public interface ReplyRepository {
     Optional<Reply> inqReplyId(long questionId, long categoryId, long replyId);
     void delReplyByQuestion(long questionId, long categoryId, long replyId);
     List<Reply> inqReplyList(long questionId, long categoryId);
-
+    List<Reply> inqReplyByUser(long userId);
 }

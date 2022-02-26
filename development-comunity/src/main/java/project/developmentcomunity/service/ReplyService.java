@@ -53,4 +53,11 @@ public class ReplyService {
     public List<Reply> inqReplyList(long questionId, long categoryoId) {
         return replyRepository.inqReplyList(questionId, categoryoId);
     }
+
+    /**
+     * 사용자별 등록 답변 리스트 조회
+     */
+    public List<Reply> inqReplyByUser(long userId) {
+        return replyRepository.inqReplyByUser(userId);
+    }
 }

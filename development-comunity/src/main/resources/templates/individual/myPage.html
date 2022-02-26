@@ -2,46 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div class="container">
-  <div>
-    <h1>IRWW - 개발자 커뮤니티</h1>
-    <h3>I did it right, why is this not working?</h3>
-    <p>마이페이지</p>
-  </div>
-  <div>
-    <label>이름</label>
-    <p th:text="${userInfo.name}">이름</p>
-    <label>닉네임</label>
-    <p th:text="${userInfo.nickName}">닉네임</p>
-    <label>이메일</label>
-    <p th:text="${userInfo.email}">이메일</p>
-    <label>깃허브주소</label>
-    <p th:text="${userInfo.githubUrl}">깃허브주소</p>
-    <label>블로그주소</label>
-    <p th:text="${userInfo.blogUrl}">블로그주소</p>
-  </div>
-  <div>
-    <h3>내가 질문한 글</h3>
-    <table>
-      <thead>
-      <tr>
-        <th>제목</th>
-        <th>조회수</th>
-        <th>등록일</th>
-        <th style="visibility:hidden;position:absolute;"></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="qna:${qnas}">
-        <td><a th:href="@{/page/questionDetail(linkId=${qna.categoryId}, questionId=${qna.questionId}, idUser=${userInfo.idUser})}" th:text="${qna.questionTitle}"></a></td>
-        <td th:text="${qna.views}"></td>
-        <td th:text="${qna.regDttm}"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <div>
-    <input type="button" method="get" id="btnMain" value="메인페이지" th:onclick="'location.href=\'' + @{/individual/main(idUser=${userInfo.idUser})} + '\''"/>
-  </div>
+    <div>
+        <h1>IRWW - 개발자 커뮤니티</h1>
+        <h3>I did it right, why is this not working?</h3>
+        <p>마이페이지</p>
+    </div>
+    <div>
+        <label>이름</label>
+        <p th:text="${userInfo.name}">이름</p>
+        <label>닉네임</label>
+        <p th:text="${userInfo.nickName}">닉네임</p>
+        <label>이메일</label>
+        <p th:text="${userInfo.email}">이메일</p>
+        <label>깃허브주소</label>
+        <p th:text="${userInfo.githubUrl}">깃허브주소</p>
+        <label>블로그주소</label>
+        <p th:text="${userInfo.blogUrl}">블로그주소</p>
+    </div>
+    <div>
+        <h3>내가 질문한 글</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>제목</th>
+                <th>조회수</th>
+                <th>등록일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="qna:${qnas}">
+                <td><a th:href="@{/page/questionDetail(linkId=${qna.categoryId}, questionId=${qna.questionId}, idUser=${userInfo.idUser})}" th:text="${qna.questionTitle}"></a></td>
+                <td th:text="${qna.views}"></td>
+                <td th:text="${qna.regDttm}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h3>내가 답변한 글</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>질문 제목</th>
+                <th>댓글 내용</th>
+                <th>등록일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reply:${replies}">
+                <td><a th:href="@{/page/questionDetail(linkId=${reply.categoryId}, questionId=${reply.questionId}, idUser=${userInfo.idUser})}" th:text="${reply.questionTitle}"></a></td>
+                <td th:text="${reply.replyDescription}"></td>
+                <td th:text="${reply.regDttm}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <input type="button" method="get" id="btnMain" value="메인페이지" th:onclick="'location.href=\'' + @{/individual/main(idUser=${userInfo.idUser})} + '\''"/>
+    </div>
 </div> <!-- /container -->
 </body>
 </html>

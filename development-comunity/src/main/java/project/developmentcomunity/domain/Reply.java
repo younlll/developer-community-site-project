@@ -2,44 +2,47 @@ package project.developmentcomunity.domain;
 
 public class Reply {
 
-    private long question_id;
-    private long category_id;
-    private long reply_id;
-    private long user_id;
+    private long questionId;
+    private long categoryId;
+    private long replyId;
+    private long userId;
     private String replyDescription;
+    private String enabledYn;
+    private String nickName;
     private String regDttm;
     private String updDttm;
+    private String questionTitle;
 
-    public long getQuestion_id() {
-        return question_id;
+    public long getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestion_id(long question_id) {
-        this.question_id = question_id;
+    public void setQuestionId(long questionId) {
+        this.questionId = questionId;
     }
 
-    public long getCategory_id() {
-        return category_id;
+    public long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory_id(long category_id) {
-        this.category_id = category_id;
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public long getReply_id() {
-        return reply_id;
+    public long getReplyId() {
+        return replyId;
     }
 
-    public void setReply_id(long reply_id) {
-        this.reply_id = reply_id;
+    public void setReplyId(long replyId) {
+        this.replyId = replyId;
     }
 
-    public long getUser_id() {
-        return user_id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getReplyDescription() {
@@ -48,6 +51,22 @@ public class Reply {
 
     public void setReplyDescription(String replyDescription) {
         this.replyDescription = replyDescription;
+    }
+
+    public String getEnabledYn() {
+        return enabledYn;
+    }
+
+    public void setEnabledYn(String enabledYn) {
+        this.enabledYn = enabledYn;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getRegDttm() {
@@ -64,5 +83,13 @@ public class Reply {
 
     public void setUpdDttm(String updDttm) {
         this.updDttm = updDttm;
+    }
+
+    public String getQuestionTitle() {
+        return questionTitle;
+    }
+
+    public void setQuestionTitle(String questionTitle) {
+        this.questionTitle = questionTitle;
     }
 }

@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.developmentcomunity.domain.Category;
 import project.developmentcomunity.domain.Question;
+import project.developmentcomunity.domain.Reply;
 import project.developmentcomunity.domain.User;
 import project.developmentcomunity.repository.CategoryRepository;
 import project.developmentcomunity.service.CategoryService;
 import project.developmentcomunity.service.QuestionService;
+import project.developmentcomunity.service.ReplyService;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +23,7 @@ public class QuestionController {
 
     @Autowired QuestionService questionService;
     @Autowired CategoryService categoryService;
+    @Autowired ReplyService replyService;
 
     @GetMapping("/page/registration")
     public String moveToRegPage(@RequestParam("linkId") long linkId, @RequestParam("idUser") long idUser, Model model) {
@@ -50,6 +53,10 @@ public class QuestionController {
         model.addAttribute("linkId", linkId);
         model.addAttribute("questionId", questionId);
         model.addAttribute("idUser", idUser);
+
+        List<Reply> replies = replyService.inqReplyList(questionId, linkId);
+        model.addAttribute("replies", replies);
+
         return "page/questionDetail";
     }
 

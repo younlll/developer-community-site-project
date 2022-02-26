@@ -37,7 +37,16 @@
     </div>
     <div>
         <h3>댓글</h3>
-        <
+        <table>
+            <tbody>
+            <tr th:each="reply:${replies}">
+                <td th:text="${reply.replyDescription}"></td>
+                <td th:text="${reply.nickName}"></td>
+                <td th:text="${reply.regDttm}"></td>
+                <td><input type="button" value="삭제" th:onclick="'location.href=\'' + @{/page/delReply(linkId=${linkId}, questionId=${questionId}, idUser=${idUser}, replyId=${reply.replyId})} + '\''"/></td>
+            </tr>
+            </tbody>
+        </table>
         <form  th:action="@{/page/registration/reply(linkId=${linkId}, questionId=${questionId}, idUser=${idUser})}" method="post">
             <label for="replyDescription"></label>
             <input type="text" id="replyDescription" name="replyDescription" placeholder="내용을 입력하세요" />

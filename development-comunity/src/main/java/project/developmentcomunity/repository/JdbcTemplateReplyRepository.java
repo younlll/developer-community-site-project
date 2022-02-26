@@ -33,10 +33,10 @@ public class JdbcTemplateReplyRepository implements ReplyRepository {
         jdbcInsert.withTableName("reply_by_question");
         Map<String, Object> parm = new HashMap<>();
 
-        parm.put("reply_id", reply.getReply_id());
-        parm.put("question_id", reply.getQuestion_id());
-        parm.put("category_id", reply.getCategory_id());
-        parm.put("user_id", reply.getUser_id());
+        parm.put("reply_id", reply.getReplyId());
+        parm.put("question_id", reply.getQuestionId());
+        parm.put("category_id", reply.getCategoryId());
+        parm.put("user_id", reply.getUserId());
         parm.put("description", reply.getReplyDescription());
         parm.put("enabled_yn", 'Y');
         parm.put("reg_dttm", new Timestamp(System.currentTimeMillis()));
@@ -46,19 +46,58 @@ public class JdbcTemplateReplyRepository implements ReplyRepository {
     }
 
     @Override
-    public Optional<Reply> inqReplyId(Long replyId) {
-        List<Reply> result = jdbcTemplate.query("select * from reply_by_question where reply_id = ?", replyRowMapper(), replyId);
+    public Optional<Reply> inqReplyId(long questionId, long categoryId, long replyId) {
+        List<Reply> result = jdbcTemplate.query("select * from reply_by_question\n" +
+                "where reply_id = ?\n" +
+                "   and question_id = ?\n" +
+                "   and category_id = ?", replyRowMapper(), replyId, questionId, categoryId);
         return result.stream().findAny();
+    }
+
+    @Override
+    public void delReplyByQuestion(long questionId, long categoryId, long replyId) {
+        jdbcTemplate.update("update reply_by_question\n" +
+                "set enabled_yn = 'N'\n" +
+                "where question_id = ?\n" +
+                "   and category_id = ?\n" +
+                "   and reply_id = ?", questionId, categoryId, replyId);
+    }
+
+    @Override
+    public List<Reply> inqReplyList(long questionId, long categoryId) {
+        return jdbcTemplate.query("select u.nick_name nick_name\n" +
+                "   , rbq.*\n" +
+                "from reply_by_question rbq\n" +
+                "   , user u\n" +
+                "where rbq.question_id = ?\n" +
+                "   and rbq.category_id = ?\n" +
+                "   and rbq.user_id = u.user_id\n" +
+                "   and rbq.enabled_yn = 'Y'", replyListRowMapper(), questionId, categoryId);
     }
 
     private RowMapper<Reply> replyRowMapper() {
         return (rs, rowNum) -> {
             Reply reply = new Reply();
-            reply.setReply_id(rs.getLong("reply_id"));
-            reply.setCategory_id(rs.getLong("category_id"));
-            reply.setQuestion_id(rs.getLong("question_id"));
-            reply.setUser_id(rs.getLong("user_id"));
+            reply.setReplyId(rs.getLong("reply_id"));
+            reply.setCategoryId(rs.getLong("category_id"));
+            reply.setQuestionId(rs.getLong("question_id"));
+            reply.setUserId(rs.getLong("user_id"));
             reply.setReplyDescription(rs.getString("description"));
+            reply.setEnabledYn(rs.getString("enabled_yn"));
+            return reply;
+        };
+    }
+
+    private RowMapper<Reply> replyListRowMapper() {
+        return (rs, rowNum) -> {
+            Reply reply = new Reply();
+            reply.setReplyId(rs.getLong("reply_id"));
+            reply.setCategoryId(rs.getLong("category_id"));
+            reply.setQuestionId(rs.getLong("question_id"));
+            reply.setUserId(rs.getLong("user_id"));
+            reply.setNickName(rs.getString("nick_name"));
+            reply.setReplyDescription(rs.getString("description"));
+            reply.setRegDttm(rs.getString("reg_dttm"));
             return reply;
         };
     }

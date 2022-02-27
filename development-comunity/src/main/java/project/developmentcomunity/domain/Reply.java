@@ -1,11 +1,15 @@
 package project.developmentcomunity.domain;
 
+import javax.validation.constraints.NotBlank;
+
 public class Reply {
 
     private long questionId;
     private long categoryId;
     private long replyId;
     private long userId;
+
+    @NotBlank(message = "댓글의 내용을 입력해주세요.")
     private String replyDescription;
     private String enabledYn;
     private String nickName;

@@ -11,6 +11,7 @@ import project.developmentcomunity.domain.Reply;
 import project.developmentcomunity.service.QuestionService;
 import project.developmentcomunity.service.ReplyService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -20,7 +21,7 @@ public class ReplyController {
     @Autowired ReplyService replyService;
 
     @PostMapping("/page/registration/reply")
-    public String registrationReply(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, @RequestParam("idUser") long idUser, Reply reply, Model model) {
+    public String registrationReply(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, @RequestParam("idUser") long idUser, @Valid Reply reply, Model model) {
         Reply insReply = new Reply();
         insReply.setQuestionId(questionId);
         insReply.setCategoryId(linkId);

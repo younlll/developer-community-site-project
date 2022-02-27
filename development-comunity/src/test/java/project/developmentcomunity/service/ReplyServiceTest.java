@@ -1,5 +1,6 @@
 package project.developmentcomunity.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class ReplyServiceTest {
         reply.setReplyDescription("reply description test");
 
         replyService.regReplyByQuesiton(reply);
-        replyService.delReplyByQuestion(1L, 1100L, replyId);
+        replyService.delReplyByQuestion(1L, 1100L, replyId, 1L);
 
         assertThat(replyService.inqReplyId(1L, 1100L, replyId).get().getEnabledYn()).isEqualTo("N");
     }
@@ -98,5 +99,21 @@ public class ReplyServiceTest {
         Set<ConstraintViolation<Reply>> violations = validator.validate(reply);
 
         assertThat(violations).isEmpty();
+    }
+
+    @Test
+    void 다른계정_댓글_삭제_오류() {
+        Reply reply = new Reply();
+        long replyId = replyService.numberingReplyId(1L, 1100L);
+        reply.setReplyId(replyId);
+        reply.setQuestionId(1L);
+        reply.setCategoryId(1100L);
+        reply.setUserId(2L);
+        reply.setReplyDescription("reply description test");
+
+        replyService.regReplyByQuesiton(reply);
+
+        IllegalStateException e = Assertions.assertThrows(IllegalStateException.class, () -> replyService.delReplyByQuestion(1L, 1100L, replyId, 1L));
+        assertThat(e.getMessage()).isEqualTo("로그인한 계정으로 작성된 댓글이 아닙니다. 본인의 댓글만 삭제할 수 있습니다.");
     }
 }

@@ -43,7 +43,7 @@ public class ReplyController {
 
     @GetMapping("/page/delReply")
     public String deleteReply(@RequestParam("linkId") long linkId, @RequestParam("questionId") long questionId, @RequestParam("idUser") long idUser, @RequestParam("replyId") long replyId, Reply reply, Model model) {
-        replyService.delReplyByQuestion(questionId, linkId, replyId);
+        replyService.delReplyByQuestion(questionId, linkId, replyId, idUser);
 
         Question questionDetail = questionService.inqQuestionDetail(questionId, linkId).get();
         model.addAttribute("questionDetail", questionDetail);

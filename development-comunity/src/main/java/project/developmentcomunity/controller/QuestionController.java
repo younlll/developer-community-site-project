@@ -15,6 +15,7 @@ import project.developmentcomunity.service.CategoryService;
 import project.developmentcomunity.service.QuestionService;
 import project.developmentcomunity.service.ReplyService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class QuestionController {
     }
 
     @PostMapping("/page/registration/mainPage")
-    public String regDescription(@RequestParam("linkId") long linkId, @RequestParam("idUser") long idUser, Question question, Model model) {
+    public String regDescription(@RequestParam("linkId") long linkId, @RequestParam("idUser") long idUser, @Valid Question question, Model model) {
         question.setCategoryId(linkId);
         question.setUserId(idUser);
         questionService.registrationQuestion(question);

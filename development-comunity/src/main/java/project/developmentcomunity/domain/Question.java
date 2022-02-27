@@ -3,6 +3,7 @@ package project.developmentcomunity.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "question_by_category")
@@ -11,12 +12,18 @@ public class Question {
     @Id
     private long questionId;
     private long categoryId;
+
+    @NotBlank(message = "제목을 필수로 입력해주세요.")
     private String questionTitle;
+
     private long views;
     private String regDttm;
     private String updDttm;
     private long userId;
+
+    @NotBlank(message = "질문 내용을 필수로 입력해주세요.")
     private String description;
+
     private String enabledYn;
     private String nickName;
 

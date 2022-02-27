@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import project.developmentcomunity.domain.User;
 import project.developmentcomunity.service.UserService;
 
+import javax.validation.Valid;
+
 @Controller
 public class JoinPageController {
 
@@ -17,13 +19,7 @@ public class JoinPageController {
     }
 
     @PostMapping("/join")
-    public String joinMember(JoinForm joinForm) {
-        User user = new User();
-        user.setEmail(joinForm.getEmail());
-        user.setPassword(joinForm.getPassword());
-        user.setNickName(joinForm.getNickName());
-        user.setName(joinForm.getName());
-
+    public String joinMember(@Valid User user) {
         userService.joinUser(user);
 
         return "redirect:/";

@@ -1,7 +1,12 @@
 package project.developmentcomunity.domain;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class User {
@@ -9,13 +14,25 @@ public class User {
     @Id
     private Long idUser;
 
+    @NotBlank(message = "이름 입력은 필수입니다.")
     private String name;
+
+    @NotBlank(message = "이메일 입력은 필수입니다.")
+    @Email(message = "이메일 형식에 맞지 않습니다.")
     private String email;
+
+    @NotBlank(message = "비밀번호 입력은 필수입니다.")
+    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*\\W)(?=\\S+$).{6,12}",
+            message = "비밀번호는 영문자와 숫자, 특수기호가 적어도 1개 이상 포함된 6자~12자의 비밀번호여야 합니다.")
     private String password;
+
     private String createdYmd;
     private String updatedYmd;
     private String enabledYn;
+
+    @NotBlank(message = "닉네임 입력은 필수입니다.")
     private String nickName;
+
     private String githubUrl;
     private String blogUrl;
     private String image;

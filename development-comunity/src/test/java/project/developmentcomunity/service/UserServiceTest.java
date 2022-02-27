@@ -1,14 +1,23 @@
 package project.developmentcomunity.service;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 import project.developmentcomunity.controller.LoginForm;
 import project.developmentcomunity.domain.User;
 import project.developmentcomunity.repository.UserRepository;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,6 +28,15 @@ class UserServiceTest {
 
     @Autowired UserService userService;
     @Autowired UserRepository userRepository;
+
+    private static ValidatorFactory factory;
+    private static Validator validator;
+
+    @BeforeAll
+    public static void init() {
+        factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+    }
 
     @Test
     void 회원번호_채번() {
@@ -80,5 +98,38 @@ class UserServiceTest {
         loginForm.setPassword("12346789");
         userService.userLogin(loginForm);
         assertThat(userService.userLogin(loginForm)).isEqualTo(false);
+    }
+
+    @Test
+    void 회원가입_입력값_null_체크() {
+        User user = new User();
+        long userId = userService.numberingUserId();
+        user.setIdUser(userId);
+        user.setName("이유나");
+        user.setPassword("password1!");
+        user.setNickName("youn");
+        user.setEmail("");
+
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+
+        assertThat(violations).isNotEmpty();
+        violations.forEach(error -> {
+            assertThat(error.getMessage()).isEqualTo("이메일 입력은 필수입니다.");
+        });
+    }
+
+    @Test
+    void 이메일_유효성_체크() {
+        User user = new User();
+        long userId = userService.numberingUserId();
+        user.setIdUser(userId);
+        user.setName("이유나");
+        user.setPassword("password1!");
+        user.setNickName("youn");
+        user.setEmail("abc@naver.com");
+
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+
+        assertThat(violations).isEmpty();
     }
 }

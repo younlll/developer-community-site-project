@@ -1,5 +1,6 @@
 package project.developmentcomunity.service;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,7 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import project.developmentcomunity.domain.Reply;
 import project.developmentcomunity.repository.ReplyRepository;
 
-import java.util.Optional;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,6 +22,15 @@ public class ReplyServiceTest {
 
     @Autowired ReplyService replyService;
     @Autowired ReplyRepository replyRepository;
+
+    private static ValidatorFactory factory;
+    private static Validator validator;
+
+    @BeforeAll
+    public static void init() {
+        factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+    }
 
     @Test
     void 답글_채번() {
@@ -53,5 +67,36 @@ public class ReplyServiceTest {
         replyService.delReplyByQuestion(1L, 1100L, replyId);
 
         assertThat(replyService.inqReplyId(1L, 1100L, replyId).get().getEnabledYn()).isEqualTo("N");
+    }
+
+    @Test
+    void 댓글_null_체크() {
+        Reply reply = new Reply();
+        reply.setReplyId(replyService.numberingReplyId(1L, 1100L));
+        reply.setQuestionId(1L);
+        reply.setCategoryId(1100L);
+        reply.setUserId(2L);
+        reply.setReplyDescription("");
+
+        Set<ConstraintViolation<Reply>> violations = validator.validate(reply);
+
+        assertThat(violations).isNotEmpty();
+        violations.forEach(error -> {
+            assertThat(error.getMessage()).isEqualTo("댓글의 내용을 입력해주세요.");
+        });
+    }
+
+    @Test
+    void 댓글_유효성_체크() {
+        Reply reply = new Reply();
+        reply.setReplyId(replyService.numberingReplyId(1L, 1100L));
+        reply.setQuestionId(1L);
+        reply.setCategoryId(1100L);
+        reply.setUserId(2L);
+        reply.setReplyDescription("댓글 유효성 체크");
+
+        Set<ConstraintViolation<Reply>> violations = validator.validate(reply);
+
+        assertThat(violations).isEmpty();
     }
 }

@@ -1,13 +1,18 @@
 package project.developmentcomunity.service;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import project.developmentcomunity.domain.Question;
 
-import java.util.Optional;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,6 +21,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 class QuestionServiceTest {
 
     @Autowired QuestionService questionService;
+
+    private static ValidatorFactory factory;
+    private static Validator validator;
+
+    @BeforeAll
+    public static void init() {
+        factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+    }
 
     @Test
     void 질문ID_채번() {
@@ -141,5 +155,40 @@ class QuestionServiceTest {
 
         Question question = questionService.inqQuestionDetail(1L, 1100L).get();
         assertThat(question.getViews()).isEqualTo(bfViews + 1);
+    }
+
+    @Test
+    void 질문_null_체크() {
+        Question question = new Question();
+        question.setQuestionId(questionService.numberingQuestionId());
+        question.setCategoryId(1100);
+        question.setQuestionTitle("질문 null 입력 체크");
+        question.setUserId(1);
+        question.setEnabledYn("Y");
+        question.setViews(0L);
+        question.setDescription("");
+
+        Set<ConstraintViolation<Question>> violations = validator.validate(question);
+
+        assertThat(violations).isNotEmpty();
+        violations.forEach(error -> {
+            assertThat(error.getMessage()).isEqualTo("질문 내용을 필수로 입력해주세요.");
+        });
+    }
+
+    @Test
+    void 게시글_유효성_체크() {
+        Question question = new Question();
+        question.setQuestionId(questionService.numberingQuestionId());
+        question.setCategoryId(1100);
+        question.setQuestionTitle("질문 유효성 입력 체크");
+        question.setUserId(1);
+        question.setEnabledYn("Y");
+        question.setViews(0L);
+        question.setDescription("질문 유효성 입력 체크");
+
+        Set<ConstraintViolation<Question>> violations = validator.validate(question);
+
+        assertThat(violations).isEmpty();
     }
 }

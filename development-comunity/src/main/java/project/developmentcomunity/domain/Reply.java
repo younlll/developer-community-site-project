@@ -1,7 +1,9 @@
 package project.developmentcomunity.domain;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
+@Entity
 public class Reply {
 
     private long questionId;

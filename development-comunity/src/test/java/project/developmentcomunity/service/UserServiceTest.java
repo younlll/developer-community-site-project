@@ -1,13 +1,10 @@
 package project.developmentcomunity.service;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 import project.developmentcomunity.controller.LoginForm;
 import project.developmentcomunity.domain.User;
@@ -27,7 +24,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class UserServiceTest {
 
     @Autowired UserService userService;
-    @Autowired UserRepository userRepository;
 
     private static ValidatorFactory factory;
     private static Validator validator;

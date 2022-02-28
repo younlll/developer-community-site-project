@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import project.developmentcomunity.domain.Reply;
-import project.developmentcomunity.repository.ReplyRepository;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -22,7 +21,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ReplyServiceTest {
 
     @Autowired ReplyService replyService;
-    @Autowired ReplyRepository replyRepository;
 
     private static ValidatorFactory factory;
     private static Validator validator;

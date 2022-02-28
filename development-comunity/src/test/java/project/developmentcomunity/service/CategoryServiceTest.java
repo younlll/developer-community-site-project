@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import project.developmentcomunity.domain.Category;
 import project.developmentcomunity.domain.Question;
-import project.developmentcomunity.repository.CategoryRepository;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ import java.util.List;
 class CategoryServiceTest {
 
     @Autowired CategoryService categoryService;
-    @Autowired CategoryRepository categoryRepository;
 
     @Test
     void 카테고리별_질문목록_조회() {

@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import project.developmentcomunity.controller.LoginForm;
 import project.developmentcomunity.domain.User;
-import project.developmentcomunity.repository.UserRepository;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -48,7 +47,7 @@ class UserServiceTest {
         user.setName("이유나");
         user.setPassword("password");
         user.setNickName("youn");
-        user.setEmail("youn.lee96@gmail.com");
+        user.setEmail("jointestmail@gmail.com");
 
         userService.joinUser(user);
 
@@ -64,7 +63,7 @@ class UserServiceTest {
         user1.setName("이유나");
         user1.setPassword("password");
         user1.setNickName("youn");
-        user1.setEmail("youn.lee96@gmail.com");
+        user1.setEmail("testmail@gmail.com");
 
         User user2 = new User();
         long userId2 = userService.numberingUserId();
@@ -72,7 +71,7 @@ class UserServiceTest {
         user2.setName("이유나");
         user2.setPassword("password");
         user2.setNickName("youn");
-        user2.setEmail("youn.lee96@gmail.com");
+        user2.setEmail("testmail@gmail.com");
 
         userService.joinUser(user1);
         IllegalStateException e = Assertions.assertThrows(IllegalStateException.class, () -> userService.joinUser(user2));

@@ -1,20 +1,20 @@
 package project.developmentcomunity.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Category {
-
-    private long categoryId;
-    private String categoryName;
-    private String linkPageUrl;
+@Table(name = "category")
+public class Category implements Serializable {
 
     @Id
     @Column(name="category_id")
+    private long categoryId;
+
+    private String categoryName;
+    private String linkPageUrl;
+
     public long getCategoryId() {
         return categoryId;
     }

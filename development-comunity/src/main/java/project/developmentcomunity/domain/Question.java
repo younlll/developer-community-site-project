@@ -1,16 +1,22 @@
 package project.developmentcomunity.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "question_by_category")
-public class Question {
+public class Question implements Serializable {
 
     @Id
+    @Column(name = "question_id")
     private long questionId;
+
+    @Id
+    @Column(name = "category_id")
     private long categoryId;
 
     @NotBlank(message = "제목을 필수로 입력해주세요.")

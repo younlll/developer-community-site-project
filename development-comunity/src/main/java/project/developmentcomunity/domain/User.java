@@ -2,21 +2,28 @@ package project.developmentcomunity.domain;
 
 import com.sun.istack.NotNull;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 @Entity
-public class User {
+@Table(name = "user")
+public class User implements Serializable {
 
     @Id
+    @Column(name = "user_id")
     private Long idUser;
 
     @NotBlank(message = "이름 입력은 필수입니다.")
     private String name;
 
+    @Id
+    @Column(name = "email")
     @NotBlank(message = "이메일 입력은 필수입니다.")
     @Email(message = "이메일 형식에 맞지 않습니다.")
     private String email;

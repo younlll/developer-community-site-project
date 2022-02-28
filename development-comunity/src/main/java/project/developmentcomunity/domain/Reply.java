@@ -1,14 +1,28 @@
 package project.developmentcomunity.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @Entity
-public class Reply {
+@Table(name = "reply_by_question")
+public class Reply implements Serializable {
 
+    @Id
+    @Column(name = "question_id")
     private long questionId;
+
+    @Id
+    @Column(name = "category_id")
     private long categoryId;
+
+    @Id
+    @Column(name = "reply_id")
     private long replyId;
+
     private long userId;
 
     @NotBlank(message = "댓글의 내용을 입력해주세요.")

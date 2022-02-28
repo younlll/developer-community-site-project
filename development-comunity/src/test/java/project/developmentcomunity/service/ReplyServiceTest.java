@@ -65,7 +65,7 @@ public class ReplyServiceTest {
         reply.setReplyDescription("reply description test");
 
         replyService.regReplyByQuesiton(reply);
-        replyService.delReplyByQuestion(1L, 1100L, replyId, 1L);
+        replyService.delReplyByQuestion(1L, 1100L, replyId, 2L);
 
         assertThat(replyService.inqReplyId(1L, 1100L, replyId).get().getEnabledYn()).isEqualTo("N");
     }

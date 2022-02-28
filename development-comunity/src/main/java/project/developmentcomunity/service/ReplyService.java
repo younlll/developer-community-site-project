@@ -43,7 +43,7 @@ public class ReplyService {
      * 답변ID를 통한 삭제
      */
     public void delReplyByQuestion(long questionId, long categoryId, long replyId, long userId) {
-        validateDuplicateUser(userId);
+        validateDuplicateUser(questionId, categoryId, replyId, userId);
         replyRepository.delReplyByQuestion(questionId, categoryId, replyId);
     }
 
@@ -64,12 +64,18 @@ public class ReplyService {
     /**
      * 삭제할 답변이 로그인 유저 등록 답변인지 확인
      */
-    private void validateDuplicateUser(long userId) {
+    private void validateDuplicateUser(long questionId, long categoryId, long replyId, long userId) {
         List<Reply> replies = replyRepository.inqReplyByUser(userId);
+        boolean toggle = false;
         for (Reply reply : replies) {
-            if(reply.getUserId() == userId) return;
+            if(reply.getQuestionId() == questionId && reply.getCategoryId() == categoryId && reply.getReplyId() == replyId) {
+                toggle = true;
+                return;
+            }
         }
 
-        throw new IllegalStateException("로그인한 계정으로 작성된 댓글이 아닙니다. 본인의 댓글만 삭제할 수 있습니다.");
+        if(!toggle) {
+            throw new IllegalStateException("로그인한 계정으로 작성된 댓글이 아닙니다. 본인의 댓글만 삭제할 수 있습니다.");
+        }
     }
 }

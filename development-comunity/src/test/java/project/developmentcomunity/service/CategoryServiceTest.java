@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import project.developmentcomunity.domain.Category;
 import project.developmentcomunity.domain.Question;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @SpringBootTest
 @Transactional
+@WebAppConfiguration
 class CategoryServiceTest {
 
     @Autowired CategoryService categoryService;

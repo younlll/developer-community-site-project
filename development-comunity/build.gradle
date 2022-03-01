@@ -6,7 +6,7 @@ plugins {
 
 jar {
 	manifest {
-		attributes('Main-Class':'project.developmentcomunity.DevelopmentComunityApplication')
+		attributes('Main-Class':'product.development-comunity.main')
 	}
 }
 

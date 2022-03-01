@@ -5,9 +5,7 @@ plugins {
 }
 
 jar {
-	manifest {
-		attributes('Main-Class':'product.development-comunity.main')
-	}
+	enabled = false
 }
 
 group = 'project'

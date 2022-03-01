@@ -16,10 +16,6 @@ jar {
 	enabled = false
 }
 
-manifest {
-	attributes 'Main-Class':'project.developmentcomunity.DevelopmentComunityApplication'
-}
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

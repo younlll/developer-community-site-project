@@ -8,6 +8,7 @@ import project.developmentcomunity.domain.User;
 
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
@@ -24,19 +25,8 @@ public class JdbcTemplateUserRepository implements UserRepository {
 
     @Override
     public void joinUser(User user) {
-        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-        jdbcInsert.withTableName("user");
-        Map<String, Object> parm = new HashMap<>();
-
-        parm.put("user_id", user.getIdUser());
-        parm.put("email", user.getEmail());
-        parm.put("name", user.getName());
-        parm.put("password", user.getPassword());
-        parm.put("nick_name", user.getNickName());
-        parm.put("github", user.getGithubUrl());
-        parm.put("blog", user.getBlogUrl());
-
-        jdbcInsert.execute(new MapSqlParameterSource(parm));
+        jdbcTemplate.update("insert into user (user_id, email, name, password, nick_name) values (?, ?, ?, ?, ?)"
+            , user.getIdUser(), user.getEmail(), user.getName(), user.getPassword(), user.getNickName());
     }
 
     @Override

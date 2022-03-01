@@ -50,7 +50,7 @@ class UserServiceTest {
         long userId = userService.numberingUserId();
         user.setIdUser(userId);
         user.setName("이유나");
-        user.setPassword("password");
+        user.setPassword("password1!");
         user.setNickName("youn");
         user.setEmail("jointestmail@gmail.com");
 

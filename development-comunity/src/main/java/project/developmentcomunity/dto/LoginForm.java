@@ -1,4 +1,4 @@
-package project.developmentcomunity.controller;
+package project.developmentcomunity.dto;
 
 public class LoginForm {
 

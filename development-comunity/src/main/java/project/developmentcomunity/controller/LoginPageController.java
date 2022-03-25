@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.developmentcomunity.domain.Category;
 import project.developmentcomunity.domain.User;
+import project.developmentcomunity.dto.LoginForm;
 import project.developmentcomunity.service.CategoryService;
 import project.developmentcomunity.service.UserService;
 

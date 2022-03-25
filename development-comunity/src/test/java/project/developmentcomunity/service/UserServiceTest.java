@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import project.developmentcomunity.controller.LoginForm;
+import project.developmentcomunity.dto.LoginForm;
 import project.developmentcomunity.domain.User;
 
 import javax.validation.ConstraintViolation;

@@ -10,14 +10,13 @@ import project.developmentcomunity.domain.Category;
 import project.developmentcomunity.domain.Question;
 import project.developmentcomunity.domain.Reply;
 import project.developmentcomunity.domain.User;
-import project.developmentcomunity.repository.CategoryRepository;
+import project.developmentcomunity.dto.SearchForm;
 import project.developmentcomunity.service.CategoryService;
 import project.developmentcomunity.service.QuestionService;
 import project.developmentcomunity.service.ReplyService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class QuestionController {

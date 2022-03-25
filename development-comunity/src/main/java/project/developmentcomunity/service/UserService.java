@@ -1,6 +1,6 @@
 package project.developmentcomunity.service;
 
-import project.developmentcomunity.controller.LoginForm;
+import project.developmentcomunity.dto.LoginForm;
 import project.developmentcomunity.domain.User;
 import project.developmentcomunity.repository.UserRepository;
 

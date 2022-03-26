@@ -1,13 +1,13 @@
 package project.developmentcomunity.dto;
 
+import project.developmentcomunity.domain.User;
+
 public class JoinForm {
 
     private String email;
     private String password;
     private String nickName;
     private String name;
-    private String githubUrl;
-    private String blogUrl;
 
     public String getEmail() {
         return email;
@@ -41,19 +41,15 @@ public class JoinForm {
         this.name = name;
     }
 
-    public String getGithubUrl() {
-        return githubUrl;
-    }
-
-    public void setGithubUrl(String githubUrl) {
-        this.githubUrl = githubUrl;
-    }
-
-    public String getBlogUrl() {
-        return blogUrl;
-    }
-
-    public void setBlogUrl(String blogUrl) {
-        this.blogUrl = blogUrl;
+    public static User toEntity(Long userId, String email, String password, String nickName, String name) {
+        return new User(userId
+            , name
+            , email
+            , password
+            , nickName
+            , ""
+            , ""
+            , ""
+            , "");
     }
 }

@@ -1,5 +1,6 @@
 package project.developmentcomunity.service;
 
+import project.developmentcomunity.dto.JoinForm;
 import project.developmentcomunity.dto.LoginForm;
 import project.developmentcomunity.domain.User;
 import project.developmentcomunity.repository.UserRepository;
@@ -17,9 +18,10 @@ public class UserService {
     /**
      * 회원가입
      */
-    public void joinUser(User user) {
-        user.setIdUser(numberingUserId());
-        validateDuplicateUser(user);
+    public void joinUser(JoinForm joinForm) {
+        Long userId = numberingUserId();
+        User user = JoinForm.toEntity(userId, joinForm.getEmail(), joinForm.getPassword(), joinForm.getNickName(), joinForm.getName());
+        validateDuplicateUser(joinForm.getEmail());
         userRepository.joinUser(user);
     }
 
@@ -34,8 +36,8 @@ public class UserService {
      * 중복 회원 검사
      * 동일한 email 주소로 가입이 불가
      */
-    private void validateDuplicateUser(User joinUser) {
-        userRepository.inqUserEmail(joinUser.getEmail())
+    private void validateDuplicateUser(String email) {
+        userRepository.inqUserEmail(email)
                 .ifPresent(m -> {
                    throw new IllegalStateException("이미 가입되어 있는 이메일 주소입니다.");
                 });

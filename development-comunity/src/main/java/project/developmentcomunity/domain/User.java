@@ -1,8 +1,9 @@
 package project.developmentcomunity.domain;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,21 +13,21 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user")
+@Table(name = "USERS")
 @Getter
 @AllArgsConstructor
 public class User implements Serializable {
 
     @Id
     @Column(name = "user_id")
-    private Long idUser;
+    private Long userId;
 
     @NotBlank(message = "이름 입력은 필수입니다.")
     private String name;
 
-    @Id
     @Column(name = "email")
     @NotBlank(message = "이메일 입력은 필수입니다.")
     @Email(message = "이메일 형식에 맞지 않습니다.")
@@ -45,10 +46,10 @@ public class User implements Serializable {
     private String blog;
 
     @Column(name = "reg_dttm")
-    private String regDttm;
+    @CreationTimestamp
+    private LocalDateTime regDttm = LocalDateTime.now();
 
     @Column(name = "upd_dttm")
-    private String updDttm;
-
-
+    @UpdateTimestamp
+    private LocalDateTime updDttm = LocalDateTime.now();
 }

@@ -1,5 +1,5 @@
-drop table user;
-create table user (
+drop table users;
+create table users (
     user_id int not null,
     email varchar(30) not null,
     name varchar(50) not null,

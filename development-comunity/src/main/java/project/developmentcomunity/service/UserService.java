@@ -22,7 +22,7 @@ public class UserService {
         Long userId = numberingUserId();
         User user = JoinForm.toEntity(userId, joinForm.getEmail(), joinForm.getPassword(), joinForm.getNickName(), joinForm.getName());
         validateDuplicateUser(joinForm.getEmail());
-        userRepository.joinUser(user);
+        userRepository.save(user);
     }
 
     /**
@@ -37,24 +37,23 @@ public class UserService {
      * 동일한 email 주소로 가입이 불가
      */
     private void validateDuplicateUser(String email) {
-        userRepository.inqUserEmail(email)
-                .ifPresent(m -> {
-                   throw new IllegalStateException("이미 가입되어 있는 이메일 주소입니다.");
-                });
+        if(userRepository.findByEmail(email)) {
+            throw new IllegalStateException("이메일 중복 오류");
+        }
     }
 
     /**
      * 회원 email을 통한 회원 조회
      */
-    public Optional<User> inqUserEmail(String userEmail) {
-        return userRepository.inqUserEmail(userEmail);
+    public boolean findByEmail(String userEmail) {
+        return userRepository.findByEmail(userEmail);
     }
 
     /**
      * 회원ID 채번 조회
      */
-    public Optional<User> inqUserId(Long userId) {
-        return userRepository.inqUserId(userId);
+    public Optional<User> findById(Long userId) {
+        return userRepository.findById(userId);
     }
 
     /**

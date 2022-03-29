@@ -3,7 +3,6 @@ package project.developmentcomunity.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import project.developmentcomunity.domain.User;
 import project.developmentcomunity.dto.JoinForm;
 import project.developmentcomunity.service.UserService;
 
